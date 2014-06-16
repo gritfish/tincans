@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Sugarcane</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="code.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
+	<script title="engine">
+	(function(){
+
+	"ENGINE"
+
+	"SUGARCANE"
+
+	testplay = "START_AT";
+
+	}());
+	</script>
+	<script title="modules">
+	"JQUERY"
+	"MODERNIZR"
+	</script>
+	<style id="baseCSS"></style>
+	<style id="defaultCSS"></style>
+	<style id="storyCSS"></style>
+	<style id="tagCSS"></style>
+	<style id="transitionCSS">
+	.transition-in {
+		opacity:0;
+		position:absolute;
+	}
+	.passage:not(.transition-out) {
+		transition: 1s;
+		-webkit-transition: 1s;
+	}
+	.transition-out {
+		opacity:0 !important;
+		position:absolute;
+	}
+	</style>
+
+	<script type="text/javascript">
+	$.noConflict();
+	// Code that uses other library's $ can follow here.
+	var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+	function removeClasses(OBJ){
+		for(var i=0; i<alphabet.length; i++){
+			OBJ.removeClass("ui-bar-"+alphabet[i]);
+			OBJ.removeClass("ui-body-"+alphabet[i]);
+			OBJ.removeClass("ui-button-"+alphabet[i]);
+			OBJ.removeClass("ui-btn-up-"+alphabet[i]);
+			OBJ.removeClass("ui-btn-down-"+alphabet[i]);
+		}
+		$('#passages a').addClass('ui-btn');
+	}
+	function setTheme(THEME){
+		
+		jQuery('#pageContainer div[data-role=header]').each(function(){
+			removeClasses(jQuery(this));
+			jQuery(this).addClass("ui-bar-"+THEME).attr("data-theme",THEME);
+		})
+		jQuery('#pageContainer div[data-role=header] a[data-role=button]').each(function(){
+			removeClasses(jQuery(this));
+			jQuery(this).addClass("ui-btn-up-"+THEME).attr("data-theme",THEME);
+		})
+		jQuery('#pageContainer div[data-role=content]').each(function(){
+			removeClasses(jQuery(this));
+			jQuery(this).addClass("ui-body-"+THEME).attr("data-theme",THEME);
+		})
+		jQuery('#pageContainer div[data-role=footer]').each(function(){
+			removeClasses(jQuery(this));
+			jQuery(this).addClass("ui-bar-"+THEME).attr("data-theme",THEME);
+		})
+	}
+	jQuery(function () {
+	    jQuery(window).bind('resize', function (event) {
+
+			var content_height = jQuery('#pageContainer').css('min-height')
+			var header_height  = jQuery('#pageContainer div[data-role="header"]').height()
+
+			content_height = content_height.replace('px','');
+
+			var inner_height = content_height-header_height-32;
+
+			jQuery('#passages').css('min-height', inner_height+'px');
+
+			event.stopImmediatePropagation();
+
+	    }).trigger('resize');
+	});
+	</script>
+</head>
+<body>
+<div id="pageContainer" data-role="page" onClick="">
+
+	<div data-role="header"  data-theme="a">
+		<a href="#mainMenu" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a"></a><h1><span id="storyTitle">Title</span></h1>
+	</div>
+
+	<div data-role="content" data-theme="a">
+		<div id="passages"></div>
+	</div>
+
+	<div data-role="panel" id="mainMenu" data-display="overlay" data-theme="b">
+		<div><p style="margin:5px 20px; text-align:center; font-weight:bold;"><span id="titleSeparator">by</span><span id="storyAuthor">Author</span></p></div>
+		
+
+		<div id="storyMenu"style="display:none"></div>
+
+		<div data-role="collapsible" data-collapsed-icon="back" data-expanded-icon="back" data-theme="b" data-content-theme="c" data-mini="true" data-corners="false">
+			<h2 id="snapback">Rewind</h2>
+			<ul id="snapbackMenu" data-role="listview">
+
+			</ul>
+		</div>
+
+		<div data-role="collapsible" data-collapsed-icon="star" data-expanded-icon="star" data-theme="b" data-content-theme="c" data-mini="true" data-corners="false">
+			<h2 id="share"  data-icon="back">Share</h2>
+			<ul id="shareMenu" data-role="listview">
+				<li onclick="javascript:location.href='http://del.icio.us/post?title='+tale.get('StoryTitle').text+'&url='+location.href">Delicious</li>
+				<li onclick="javascript:location.href='http://facebook.com/share.php?t='+tale.get('StoryTitle').text+'&u='+location.href">Facebook</li>
+				<li onclick="javascript:location.href='http://stumbleupon.com/submit?title='+tale.get('StoryTitle').text+'&url='+location.href">StumbleUpon</li>
+				<li onclick="javascript:location.href='http://twitter.com/home?status=Reading%20'+location.href">Twitter</li>
+			</ul>
+		</div>
+
+		<a id="restart" data-role="button" data-icon="refresh" data-mini="true" data-corners="false"  data-theme="b">Restart</a>
+
+		<div><p style="margin:5px 20px; text-align:center;">This story was created with <a href="http://gimcrackd.com/etc/sr/">Twee</a> and is powered by <a href="http://tiddlywiki.com/">TiddlyWiki</a></p></div>
+	</div>
+
+</div>
+
+<div id="storeArea" data-size="STORY_SIZE" hidden>"STORY"</div></body></html>
